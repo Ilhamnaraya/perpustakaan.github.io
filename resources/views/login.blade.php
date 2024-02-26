@@ -21,7 +21,7 @@
             <input type="password" name="password" class="form-control" id="password" />
         </div>
 
-        <div class="w-100 d-flex justify-content-center">
+        <div class="w-100 d-flex justify-content-start">
             <div class="form-check">
                 <input class="form-check-input" type="checkbox" name="remember" id="remember">
                 <label class="form-check-label" for="remember">
@@ -39,7 +39,7 @@
         <div class="w-100 d-flex justify-content-end">
             <span>
                 Belum punya akun?
-                <a href="{{ route('register') }}">Daftar!</a>
+                <a href="{{ route('register') }}" class="text-decoration-none">Daftar!</a>
             </span>
         </div>
     </form>

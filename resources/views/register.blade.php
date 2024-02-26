@@ -110,7 +110,7 @@
         <div class="w-100 d-flex justify-content-end">
             <span>
                 Sudah punya akun?
-                <a href="{{ route('login') }}">Login!</a>
+                <a href="{{ route('login') }}" class="text-decoration-none">Login!</a>
             </span>
         </div>
     </form>
