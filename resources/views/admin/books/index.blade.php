@@ -6,8 +6,10 @@
                     <div class="card-body">{!! $success !!}</div>
                 </div>
             @endif
-
-            <a href="{{ route('admin.books.create') }}" class="btn btn-primary d-block d-sm-inline-block my-3">Tambah</a>
+            <div class="w-100 d-flex justify-content-end">
+                <a href="{{ route('admin.books.create') }}" class="btn btn-primary d-block d-sm-inline-block my-3">Tambah</a>
+                <a href="#" class="btn btn-secondary ml-2 d-block d-sm-inline-block my-3">sampah</a>
+            </div>    
 
             <x-admin.search url="{{ route('admin.books.index') }}" placeholder="Cari buku..." />
 

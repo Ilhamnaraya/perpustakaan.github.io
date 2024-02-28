@@ -19,14 +19,14 @@
         <h2 class="fs-4 fw-bold ms-4 mb-4">Paling Populer</h2>
 
         <div class="container">
-            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-3">
                 @foreach ($popularBooks as $popularBook)
                     <a href="{{ route('preview', $popularBook) }}" class="col text-dark text-decoration-none">
                         <div class="card">
                             <img src="{{ isset($popularBook->cover) ? asset('storage/' . $popularBook->cover) : asset('storage/placeholder.png') }}"
-                                alt="{{ $popularBook->title }}" class="card-img-top">
+                                alt="{{ $popularBook->title }}" class="card-img-top" style="height: 400px;">
                             <div class="card-body text-center">
-                                <h3 class="card-text fs-5 fw-bold mb-5">{{ $popularBook->title }}</h3>
+                                <h3 class="card-text fs-5 fw-bold mb-2">{{ $popularBook->title }}</h3>
                                 <span class="fs-6">Dipinjam
                                     <span
                                         class="fw-bold text-decoration-underline">{{ $popularBook->borrows_count }}</span>
@@ -43,12 +43,12 @@
         <h2 class="fs-4 fw-bold ms-4 mb-4">Terbaru</h2>
 
         <div class="container">
-            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-3">
                 @foreach ($newestBooks as $newestBook)
                     <a href="{{ route('preview', $newestBook) }}" class="col text-dark text-decoration-none">
                         <div class="card">
                             <img src="{{ isset($newestBook->cover) ? asset('storage/' . $newestBook->cover) : asset('storage/placeholder.png') }}"
-                                alt="{{ $newestBook->title }}" class="card-img-top">
+                                alt="{{ $newestBook->title }}" class="card-img-top"style="height: 400px;">
                             <div class="card-body text-center">
                                 <h3 class="card-text fs-5 fw-bold mb-5">{{ $newestBook->title }}</h3>
                                 <span class="fs-6">Terbit
