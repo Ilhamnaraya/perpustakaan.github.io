@@ -31,7 +31,36 @@ class BookController extends Controller
             'books' => $books,
         ]);
     }
-
+    public function trashed()
+    {
+        $trashedBooks = Book::onlyTrashed()->get();
+    
+        return view('admin.books.trashed', compact('trashedBooks'));
+    }
+    
+    public function restore($id)
+    {
+        $book = Book::withTrashed()->find($id);
+    
+        if ($book) {
+            $book->restore();
+            return redirect()->route('admin.books.trashed')->with('success', 'Buku berhasil dikembalikan.');
+        }
+    
+        return redirect()->route('admin.books.trashed')->with('error', 'Buku tidak ditemukan.');
+    }
+    
+    public function forceDelete($id)
+    {
+        $book = Book::withTrashed()->find($id);
+    
+        if ($book) {
+            $book->forceDelete();
+            return redirect()->route('admin.books.trashed')->with('success', 'Buku berhasil dihapus permanen.');
+        }
+    
+        return redirect()->route('admin.books.trashed')->with('error', 'Buku tidak ditemukan.');
+    }
     public function create()
     {
         return view('admin.books.create');
@@ -108,4 +137,5 @@ class BookController extends Controller
             ->route('admin.books.index')
             ->with('success', 'Berhasil menghapus buku.');
     }
+ 
 }

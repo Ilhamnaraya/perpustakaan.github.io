@@ -42,6 +42,9 @@ Route::middleware('auth')->group(function () {
             Route::resource('/members', MemberController::class)->except('show');
 
             Route::resource('/books', BookController::class)->except('show');
+            Route::get('/books/trashed', [BookController::class, 'trashed'])->name('books.trashed');
+            Route::put('/books/{id}/restore', [BookController::class, 'restore'])->name('books.restore');
+            Route::delete('/books/{id}/force-delete', [BookController::class, 'forceDelete'])->name('books.forceDelete');
 
             Route::resource('/borrows', BorrowController::class)->except('show', 'create', 'store');
 

@@ -1,4 +1,4 @@
-<x-admin-layout title="List Buku">
+<x-admin-layout title="List Buku terhapus">
     <div class="card shadow mb-4">
         <div class="card-body">
             @if ($success = session()->get('success'))
@@ -7,9 +7,8 @@
                 </div>
             @endif
             <div class="w-100 d-flex justify-content-end">
-                <a href="{{ route('admin.books.create') }}" class="btn btn-primary d-block d-sm-inline-block my-3">Tambah</a>
-                <a href="{{ route('admin.books.trashed') }}" class="btn btn-secondary ml-2 d-block d-sm-inline-block my-3">sampah</a>
-            </div>    
+                <a href="{{ route('admin.books.index') }}" class="btn btn-primary d-block d-sm-inline-block my-3">kembali</a>
+             </div>    
 
             <x-admin.search url="{{ route('admin.books.index') }}" placeholder="Cari buku..." />
 
@@ -24,44 +23,32 @@
                             <th>Penerbit</th>
                             <th>Tahun Terbit</th>
                             <th>Jumlah Tersedia</th>
-                            <th>Status</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($books as $book)
+                        @forelse ($trashedBooks as $book)
                             <tr>
                                 <td>
                                     <img src="{{ isset($book->cover) ? asset('storage/' . $book->cover) : asset('storage/placeholder.png') }}"
                                         alt="{{ $book->title }}" class="rounded" style="width: 100px;">
                                 </td>
-                                <td>{{ $book->category }}</td>
+                                <td>{{ $book->category }} </td>
                                 <td>{{ $book->title }}</td>
                                 <td>{{ $book->writer }}</td>
                                 <td>{{ $book->publisher }}</td>
                                 <td>{{ $book->publish_year }}</td>
                                 <td>{{ $book->amount }} buku</td>
                                 <td>
-                                    @switch($book->status)
-                                        @case(\App\Models\Book::STATUSES['Available'])
-                                            <span class="badge badge-success">Tersedia</span>
-                                        @break
-
-                                        @case(\App\Models\Book::STATUSES['Borrowed'])
-                                            <span class="badge badge-warning">Dipinjam</span>
-                                        @break
-                                    @endswitch
-                                </td>
-                                <td>
-                                    <a href="{{ route('admin.books.edit', $book) }}"
-                                        class="btn btn-link">Edit</a>
-
-                                    <form action="{{ route('admin.books.destroy', $book) }}" method="POST"
-                                        onsubmit="return confirm('Anda yakin ingin menghapus buku ini?')">
+                                    <form action="{{ route('admin.books.restore', $book->id) }}" method="post">
                                         @csrf
-                                        @method('DELETE')
-
-                                        <button type="submit" class="btn btn-link text-danger">Hapus</button>
+                                        @method('put')
+                                        <button type="submit" class="btn btn-link">Kembalikan</button>
+                                    </form>
+                                    <form action="{{ route('admin.books.forceDelete', $book->id) }}" method="post">
+                                        @csrf
+                                        @method('delete')
+                                        <button type="submit" class="btn btn-link text-danger" onclick="return confirm('Anda yakin ingin menghapus permanen buku ini?')">Hapus Permanen</button>
                                     </form>
                                 </td>
                             </tr>
@@ -73,9 +60,7 @@
                         </tbody>
                     </table>
 
-                    <div class="mt-5">
-                        {{ $books->withQueryString()->links() }}
-                    </div>
+ 
                 </div>
             </div>
         </div>
