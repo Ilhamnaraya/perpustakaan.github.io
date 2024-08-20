@@ -1,7 +1,6 @@
 <x-app-layout>
     <section class="d-flex flex-column justify-content-center align-items-center text-center mt-5 py-5 px-4">
-        <h1 class="mt-4 fs-2 fw-bold">Selamat Datang di Perpustakaan Online!</h1>
-        <form action="{{ route('search') }}" method="GET" class="position-relative d-flex w-100 my-4" style="max-width: 630px">
+         <form action="{{ route('search') }}" method="GET" class="position-relative d-flex w-100 my-1" style="max-width: 630px">
             <input type="text" name="search" class="form-control" placeholder="Cari buku..." />
 
             <button type="submit" class="btn btn-link" style="position: absolute; bottom: 4px; right: 1px">
@@ -15,14 +14,14 @@
         </form>
     </section>
 
-    <section class="py-5 bg-body-tertiary">
+    <section class="py-1 bg-body-tertiary">
         <h2 class="fs-4 fw-bold ms-4 mb-4">Paling Populer</h2>
 
         <div class="container">
             <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-3">
                 @foreach ($popularBooks as $popularBook)
                     <a href="{{ route('preview', $popularBook) }}" class="col text-dark text-decoration-none">
-                        <div class="card">
+                        <div class="card border-3">
                             <img src="{{ isset($popularBook->cover) ? asset('storage/' . $popularBook->cover) : asset('storage/placeholder.png') }}"
                                 alt="{{ $popularBook->title }}" class="card-img-top" style="height: 400px;">
                             <div class="card-body text-center">
@@ -46,7 +45,7 @@
             <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-3">
                 @foreach ($newestBooks as $newestBook)
                     <a href="{{ route('preview', $newestBook) }}" class="col text-dark text-decoration-none">
-                        <div class="card">
+                        <div class="card border-3">
                             <img src="{{ isset($newestBook->cover) ? asset('storage/' . $newestBook->cover) : asset('storage/placeholder.png') }}"
                                 alt="{{ $newestBook->title }}" class="card-img-top"style="height: 400px;">
                             <div class="card-body text-center">

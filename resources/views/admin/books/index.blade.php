@@ -47,7 +47,7 @@
                                             <span class="badge badge-success">Tersedia</span>
                                         @break
 
-                                        @case(\App\Models\Book::STATUSES['Borrowed'])
+                                        @case(\App\Models\Book::STATUSES['Unavailable'])
                                             <span class="badge badge-warning">Dipinjam</span>
                                         @break
                                     @endswitch
